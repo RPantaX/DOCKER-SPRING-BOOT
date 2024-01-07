@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  app:
+    container_name: "sbcontainer"
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=jdbc:mysql://mysql-some:3306/hifromDocker
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=123456
+    depends_on:
+      - mysql-some
+  mysql-some:
+    container_name: "mysql-some"
+    image: "mysql"
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: "hifromDocker"
+volumes:
+  mysql-data:
